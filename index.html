@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>¨
+
+    <style>
+        .one{
+            color: green;
+        }
+        .two{
+            text-decoration: underline;
+        }
+        .canvas{
+            width: 300px;
+            height: 300px;
+            margin-top: 20px;
+            background: #ddd;
+        }
+    </style>
+
+    <!--Vue script-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <h1>Vue basics</h1>
+    <div id="app">
+        <h2>{{ title }}</h2> <!--Vue will input something here dynamically-->
+
+        <p>{{ greet('morning') }}</p> <!--Calls method-->
+
+        <!--Binds variable into a html element that only accepts strings-->
+        <a v-bind:href="url">Link</a> <!--Directive-->
+        <div v-bind:class="classes">Classes from instance</div>
+        <input type="text" v-bind:value="name">
+
+        <p>I earn ${{ wage }} dkk per hour</p>
+        <button v-on:click="wage++">Increase wage by 1 dkk</button>
+        <button v-on:click="changeWage(-1)">Decrease wage by 1 dkk</button>
+        <button v-on:dblclick="changeWage(5)">Decrease wage by 1 dkk</button>
+        <button v-on:dblclick="changeWage(-5)">Decrease wage by 1 dkk</button>
+
+        <hr>
+        <button @click="logEvent">Log event info</button>
+        <!--mouseover to show coordinates-->
+        <div class="canvas" @mousemove="logCoordinates">{{ Coordinates.x }}, {{ Coordinates.y }}</div>
+        <hr>
+        <input type="text" @keyup="updateName">
+        <input type="text" @keypress="updateName">
+        <hr>
+        <input type="text" v-model="name">
+        <hr>
+        <!--only works when holding alt while clicking-->
+        <button @click.alt="logMsg">alt+click me</button>
+        <!--prevents going to google-->
+        <a href="https://www.google.dk/" @click.prevent="logMsg">google</a>
+        <hr>
+        <p v-if="showName">Mario</p>
+        <p v-else-if="showAge">25</p>
+        <button @click="toggleName">Toggle name - {{ showName }}</button>
+        <button @click="toggleAge">Toggle age - {{ showAge }}</button>
+        <hr>
+        <ul>
+            <li v-for="item in itemList">{{ item }}</li>
+        </ul>
+        <div v-for="(ninja, arrayIndex) in ninjaList">
+            <p>{{ arrayIndex }}</p>
+            <p>name: {{ ninja.name }}</p>
+            <p>age: {{ ninja.age }}</p>
+        </div>
+    </div>
+
+    <!--JS file to write code-->
+    <script src="app.js"></script>
+</body>
+</html>
